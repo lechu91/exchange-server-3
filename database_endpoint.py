@@ -66,6 +66,30 @@ def trade():
             
         #Your code here
         #Note that you can access the database session using g.session
+        
+        # Check if order is signed
+        
+        # Check platform
+        
+        if content['payload']['platform'] == 'Ethereum':
+
+            print("Ethereum")
+            # Check Ethereum
+            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
+            if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
+                result = True
+            else:
+                result = False
+        else:
+            # Check Algorand
+            print("Algorand")
+            if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
+                result = True
+            else:
+                result = False
+        
+        
+        
 
 @app.route('/order_book')
 def order_book():
