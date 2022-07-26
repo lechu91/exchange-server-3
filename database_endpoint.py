@@ -32,8 +32,8 @@ def shutdown_session(response_or_exc):
 
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
-    
-    pass
+    with open('server_log.txt', 'a') as log_file:
+     log_file.write(json.dumps(d))
 
 """
 ---------------- Endpoints ----------------
