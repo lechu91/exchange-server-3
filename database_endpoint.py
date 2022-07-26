@@ -68,7 +68,9 @@ def trade():
         #Note that you can access the database session using g.session
         
         # Extract data from content
-
+        
+        pk = content['payload']['pk']
+        payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
         payload = content.get("payload")
         print(payload)
@@ -95,7 +97,7 @@ def trade():
 
             print("Ethereum")
             # Check Ethereum
-            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
+            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
                 g.session.commit()
@@ -106,7 +108,7 @@ def trade():
         else:
             # Check Algorand
             print("Algorand")
-            if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
+            if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
                 g.session.add(new_order)
                 g.session.commit()
                 return jsonify( True )                      
