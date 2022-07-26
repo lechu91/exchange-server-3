@@ -67,6 +67,27 @@ def trade():
         #Your code here
         #Note that you can access the database session using g.session
         
+        # Extract data from content
+
+        sig = content.get("sig")
+        payload = content.get("payload")
+        
+        print(payload)
+        
+        # Create order
+        
+        order_data = {'sig': signature,
+             'payload': { 'sender_pk': public_key,
+                         'receiver_pk': public_key,
+                        'buy_currency': "Ethereum",
+                        'sell_currency': "Algorand",
+                        'buy_amount': 51,
+                        'sell_amount': 257,
+                        'platform': 'Algorand'
+                        }
+        
+        new_order = Order(**{f:child_data[f] for f in fields_child})
+        
         # Check if order is signed
         
         # Check platform
@@ -77,16 +98,21 @@ def trade():
             # Check Ethereum
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
+                # Insert Order
+                
+                
+                
                 result = True
             else:
-                result = False
+                log_message(json.dumps(payload))
         else:
             # Check Algorand
             print("Algorand")
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
                 result = True
+                # Insert Order
             else:
-                result = False
+                log_message(json.dumps(payload))
         
         
         
