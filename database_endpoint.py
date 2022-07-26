@@ -71,22 +71,20 @@ def trade():
 
         sig = content.get("sig")
         payload = content.get("payload")
-        
         print(payload)
         
         # Create order
         
-        order_data = {'sig': signature,
-             'payload': { 'sender_pk': public_key,
-                         'receiver_pk': public_key,
-                        'buy_currency': "Ethereum",
-                        'sell_currency': "Algorand",
-                        'buy_amount': 51,
-                        'sell_amount': 257,
-                        'platform': 'Algorand'
-                        }
+        order_data = {'sig': sig,
+                      'payload': { 'sender_pk': payload.get("sender_pk"),
+                                  'receiver_pk': payload.get("receiver_pk"),
+                                  'buy_currency': payload.get("buy_currency"),
+                                  'sell_currency': payload.get("sell_currency"),
+                                  'buy_amount': payload.get("buy_ammount"),
+                                  'sell_amount': payload.get("sell_ammount"),
+                                 }
         
-        new_order = Order(**{f:child_data[f] for f in fields_child})
+        new_order = Order(**{f:order_data[f] for f in columns[:-1]})
         
         # Check if order is signed
         
