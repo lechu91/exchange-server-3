@@ -117,8 +117,10 @@ def trade():
 def order_book():
     #Your code here
     #Note that you can access the database session using g.session
-    result = g.session
-                      
+    result = g.session.query(payload)
+#     result = query.options(
+#             joinedload(Author.books).load_only(Book.summary, Book.excerpt),
+#         )
                       
     return jsonify(result)
 
