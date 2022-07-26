@@ -96,24 +96,16 @@ def trade():
             # Check Ethereum
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
-                # Insert Order
-                
-                
-                
-                result = True
+                g.session.add(new_order)
             else:
                 log_message(json.dumps(payload))
         else:
             # Check Algorand
             print("Algorand")
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
-                result = True
-                # Insert Order
+                g.session.add(new_order)
             else:
                 log_message(json.dumps(payload))
-        
-        
-        
 
 @app.route('/order_book')
 def order_book():
