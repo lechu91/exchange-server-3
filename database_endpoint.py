@@ -118,9 +118,12 @@ def trade():
 
 @app.route('/order_book')
 def order_book():
-    #Your code here
-    #Note that you can access the database session using g.session
-    result = g.session.query(Order).all()
+    
+#     #Your code here
+#     #Note that you can access the database session using g.session
+#     result = g.session.query(Order).all()
+
+    result = True
                      
     return jsonify(result)
 
