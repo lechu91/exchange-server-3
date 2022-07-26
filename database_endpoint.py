@@ -97,20 +97,29 @@ def trade():
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
+                g.session.commit()
+                return jsonify( True )
             else:
                 log_message(json.dumps(payload))
+                return jsonify( False )
         else:
             # Check Algorand
             print("Algorand")
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
                 g.session.add(new_order)
+                g.session.commit()
+                return jsonify( True )                      
             else:
                 log_message(json.dumps(payload))
+                return jsonify( False )                      
 
 @app.route('/order_book')
 def order_book():
     #Your code here
     #Note that you can access the database session using g.session
+    result = g.session
+                      
+                      
     return jsonify(result)
 
 if __name__ == '__main__':
