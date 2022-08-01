@@ -73,7 +73,7 @@ def trade():
         payload = content.get("payload")
         print("Payload:")
         print(payload)
-        payload_text = json.dumps(payload)
+        payload_text = json.dumps(content['payload'])
         print("payload_text:")
         print(payload_text)
         sig = content.get("sig")
