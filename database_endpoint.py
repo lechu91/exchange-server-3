@@ -112,6 +112,8 @@ def trade():
             else:
                 log_message(json.dumps(payload))
                 print("Gonzalo2")
+                g.session.add(order_data)
+                g.session.commit()
                 return jsonify( False )
         else:
             # Check Algorand
@@ -125,6 +127,8 @@ def trade():
             else:
                 log_message(json.dumps(payload))
                 print("Gonzalo4")
+                g.session.add(order_data)
+                g.session.commit()
                 return jsonify( False )                      
 
 @app.route('/order_book')
