@@ -99,7 +99,8 @@ def trade():
             # Check Ethereum
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
-                g.session.add(new_order)
+                #g.session.add(new_order)
+                g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )
             else:
@@ -109,7 +110,8 @@ def trade():
             # Check Algorand
             print("Algorand")
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
-                g.session.add(new_order)
+                #g.session.add(new_order)
+                g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )                      
             else:
