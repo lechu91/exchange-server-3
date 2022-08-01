@@ -140,6 +140,7 @@ def order_book():
                   'signature': row.signature}
         
         a_list.append(a_dict)
+        print(a_dict)
         print("Hello, world")
     
     result = json.dumps({'data' : a_list})
