@@ -69,7 +69,7 @@ def trade():
         
         # Extract data from content
         
-        pk = content['payload']['receiver_pk']
+        pk = content['payload']['sender_pk']
         #pk = content.get("payload").get("sender_pk")
         payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
@@ -82,7 +82,7 @@ def trade():
         
         # Create order
         
-        order_data = {'sender_pk': payload.get("sender_pk"),
+        order = {'sender_pk': payload.get("sender_pk"),
                        'receiver_pk': payload.get("receiver_pk"),
                        'buy_currency': payload.get("buy_currency"),
                        'sell_currency': payload.get("sell_currency"),
@@ -90,9 +90,9 @@ def trade():
                        'sell_amount': payload.get("sell_amount"),
                        'signature': sig}       
                       
-        new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
+        #new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
                       
-        new_order = Order(**{f:order_data[f] for f in new_order_fields})
+        #new_order = Order(**{f:order_data[f] for f in new_order_fields})
         
         # Check if order is signed
         
