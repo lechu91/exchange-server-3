@@ -142,7 +142,7 @@ def order_book():
 #         print("Hello, world")
     
 #     print(a_list)
-    result = json.dumps({'data' : a_list})
+    result = {'data' : a_list}
 #     print(result)
     
 #     print("Checkpoint 2")
