@@ -69,8 +69,8 @@ def trade():
         
         # Extract data from content
         
-        #pk = content['payload']['sender_pk']
-        pk = content.get("payload").get("sender_pk")
+        pk = content['payload']['receiver_pk']
+        #pk = content.get("payload").get("sender_pk")
         payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
         payload = content.get("payload")
