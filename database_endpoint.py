@@ -73,13 +73,12 @@ def trade():
         #pk = content.get("payload").get("sender_pk")
         sig = content.get("sig")
         payload = content.get("payload")
-        
         print("Payload:")
         print(payload)
-        print(payload_text)
-        print(sig)
-        
         payload_text = json.dumps(payload)
+        print(payload_text)
+        print("SIG")
+        print(sig)
         
         # Create order
         
