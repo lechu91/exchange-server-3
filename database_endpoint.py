@@ -69,7 +69,8 @@ def trade():
         
         # Extract data from content
         
-        pk = content['payload']['sender_pk']
+        #pk = content['payload']['sender_pk']
+        pk = content.get("payload").get("sender_pk")
         payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
         payload = content.get("payload")
@@ -101,10 +102,8 @@ def trade():
 
             print("Check for Ethereum")
             # Check Ethereum
-            #eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
-            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
-            
-            
+            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
+            #eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 #g.session.add(new_order)
