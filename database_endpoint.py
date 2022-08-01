@@ -111,9 +111,9 @@ def trade():
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 #g.session.add(new_order)
+                print("Gonzalo1")
                 g.session.add(order_data)
                 g.session.commit()
-                print("Gonzalo1")
                 return jsonify( True )
             else:
                 print("Gonzalo2")
