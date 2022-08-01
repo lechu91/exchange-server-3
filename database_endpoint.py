@@ -73,6 +73,8 @@ def trade():
         payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
         payload = content.get("payload")
+        
+        print("Payload:")
         print(payload)
         
         # Create order
@@ -127,7 +129,9 @@ def order_book():
     print("Checkpoint 1")
     
     #result = json.dumps(g.session.query(Order).all())
-    result = g.session.query(Order).all()
+    data = g.session.query(Order).all()
+    
+    result = {'data' : data}
     
     print(type(result))
     print(result)
