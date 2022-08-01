@@ -77,15 +77,18 @@ def trade():
         # Create order
         
         order_data = {'sender_pk': payload.get("sender_pk"),
-                       'receiver_pk': payload.get("receiver_pk"),
-                       'buy_currency': payload.get("buy_currency"),
-                       'sell_currency': payload.get("sell_currency"),
-                       'buy_amount': payload.get("buy_amount"),
-                       'sell_amount': payload.get("sell_amount"),
-                       'signature': sig}
+                      'receiver_pk': payload.get("receiver_pk"),
+                      'buy_currency': payload.get("buy_currency"),
+                      'sell_currency': payload.get("sell_currency"),
+                      'buy_amount': payload.get("buy_amount"),
+                      'sell_amount': payload.get("sell_amount"),
+                      'signature': sig}
         
         print("order_data")
         print(order_data)
+        
+        new_order = Order(name='ed', fullname='Ed Jones', nickname='edsnickname')
+        
                       
         new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
         new_order = Order(**{f:order_data[f] for f in new_order_fields})
@@ -98,19 +101,17 @@ def trade():
             print("Check for Ethereum")
             # Check Ethereum
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
-            #eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
                 print("Gonzalo1")
-                #g.session.add(order_data)
+#                 g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )
             else:
                 print("Gonzalo2")
                 print(payload_text)
                 log_message(payload_text)
-                
                 return jsonify( False )
         else:
             # Check Algorand
@@ -118,7 +119,7 @@ def trade():
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
                 print("Gonzalo3")
                 g.session.add(new_order)
-                #g.session.add(order_data)
+#                 g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )                      
             else:
