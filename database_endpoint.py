@@ -76,6 +76,7 @@ def trade():
         
         print("Payload:")
         print(payload)
+        print(payload_text)
         
         # Create order
         
@@ -97,9 +98,12 @@ def trade():
         
         if content['payload']['platform'] == 'Ethereum':
 
-            print("Ethereum")
+            print("Check for Ethereum")
             # Check Ethereum
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
+            
+            
+            
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 #g.session.add(new_order)
                 g.session.add(order_data)
@@ -112,7 +116,7 @@ def trade():
                 return jsonify( False )
         else:
             # Check Algorand
-            print("Algorand")
+            print("Check for Algorand")
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
                 #g.session.add(new_order)
                 g.session.add(order_data)
