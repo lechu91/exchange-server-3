@@ -87,9 +87,6 @@ def trade():
         print("order_data")
         print(order_data)
         
-        new_order = Order(name='ed', fullname='Ed Jones', nickname='edsnickname')
-        
-                      
         new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
         new_order = Order(**{f:order_data[f] for f in new_order_fields})
 
