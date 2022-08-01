@@ -134,12 +134,19 @@ def order_book():
     print("Checkpoint 1")
     
     #result = json.dumps(g.session.query(Order).all())
-    data = g.session.query(Order).all()
     
-    result = {'data' : data}
+    a_list = []
     
-    print(type(result))
-    print(result)
+    for an_order in g.session.query(Order).all():
+        a_list.append({'sender_pk':an_order.sender_pk,
+                       'receiver_pk':an_order.receiver_pk,
+                       'buy_currency':an_order.buy_currency,
+                       'sell_currency':an_order.sell_currency,
+                       'buy_amount':an_order.buy_amount,
+                       'sell_amount':an_order.sell_amount,
+                       'signature': an_order.signature}
+    
+    result = {'data' : a_list}
     
     print("Checkpoint 2")
                    
