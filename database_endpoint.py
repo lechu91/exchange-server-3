@@ -73,22 +73,15 @@ def trade():
         payload = content.get("payload")
         print("Payload:")
         print(payload)
+        payload_text = json.dumps(payload)
+        print("payload_text:")
+        print(payload_text)
         sig = content.get("sig")
         print("Sig:")
         print(sig)
         pk = payload.get("sender_pk")
         print("PK:")
         print(pk)
-        
-        #pk = content.get("payload").get("sender_pk")
-        
-        
-        print("Payload:")
-        print(payload)
-        payload_text = json.dumps(payload)
-        print(payload_text)
-        print("SIG")
-        print(sig)
         
         # Create order
         
@@ -98,7 +91,10 @@ def trade():
                        'sell_currency': payload.get("sell_currency"),
                        'buy_amount': payload.get("buy_amount"),
                        'sell_amount': payload.get("sell_amount"),
-                       'signature': sig}       
+                       'signature': sig}
+        
+        print("order_data")
+        print(order_data)
                       
         #new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
         #new_order = Order(**{f:order_data[f] for f in new_order_fields})
