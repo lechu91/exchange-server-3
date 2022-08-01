@@ -69,19 +69,10 @@ def trade():
         
         # Extract data from content
         
-        print("Extract data from content")
         payload = content.get("payload")
-        print("Payload:")
-        print(payload)
         payload_text = json.dumps(content['payload'])
-        print("payload_text:")
-        print(payload_text)
         sig = content['sig']
-        print("Sig:")
-        print(sig)
         pk = payload.get("sender_pk")
-        print("PK:")
-        print(pk)
         
         # Create order
         
@@ -96,8 +87,8 @@ def trade():
         print("order_data")
         print(order_data)
                       
-        #new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
-        #new_order = Order(**{f:order_data[f] for f in new_order_fields})
+        new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
+        new_order = Order(**{f:order_data[f] for f in new_order_fields})
 
         # Check if order is signed
         
@@ -110,9 +101,9 @@ def trade():
             #eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
-                #g.session.add(new_order)
+                g.session.add(new_order)
                 print("Gonzalo1")
-                g.session.add(order_data)
+                #g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )
             else:
@@ -126,8 +117,8 @@ def trade():
             print("Check for Algorand")
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
                 print("Gonzalo3")
-                #g.session.add(new_order)
-                g.session.add(order_data)
+                g.session.add(new_order)
+                #g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )                      
             else:
