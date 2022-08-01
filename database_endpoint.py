@@ -146,7 +146,7 @@ def order_book():
                        'sell_amount':an_order.sell_amount,
                        'signature': an_order.signature}
     
-    result = {'data' : a_list}
+    result = json.dumps({'data' : a_list})
     
     print("Checkpoint 2")
                    
