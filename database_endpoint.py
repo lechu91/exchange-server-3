@@ -143,7 +143,9 @@ def order_book():
         print(a_dict)
         print("Hello, world")
     
+    print(a_list)
     result = json.dumps({'data' : a_list})
+    print(result)
     
     print("Checkpoint 2")
                    
