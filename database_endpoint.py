@@ -77,6 +77,7 @@ def trade():
         print("Payload:")
         print(payload)
         print(payload_text)
+        print(sig)
         
         # Create order
         
@@ -100,7 +101,8 @@ def trade():
 
             print("Check for Ethereum")
             # Check Ethereum
-            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
+            #eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
+            eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
             
             
             
