@@ -121,7 +121,12 @@ def order_book():
     
     #Your code here
     #Note that you can access the database session using g.session
+    
+    print("Checkpoint 1")
+    
     result = json.dumps(g.session.query(Order).all())
+    
+    print("Checkpoint 2")
                    
     return jsonify(result)
 
