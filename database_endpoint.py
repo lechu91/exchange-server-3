@@ -127,6 +127,9 @@ def order_book():
     #result = json.dumps(g.session.query(Order).all())
     result = g.session.query(Order).all()
     
+    print(type(result))
+    print(result)
+    
     print("Checkpoint 2")
                    
     return jsonify(result)
