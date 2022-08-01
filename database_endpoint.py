@@ -82,7 +82,7 @@ def trade():
         
         # Create order
         
-        order = {'sender_pk': payload.get("sender_pk"),
+        order_data = {'sender_pk': payload.get("sender_pk"),
                        'receiver_pk': payload.get("receiver_pk"),
                        'buy_currency': payload.get("buy_currency"),
                        'sell_currency': payload.get("sell_currency"),
@@ -91,13 +91,11 @@ def trade():
                        'signature': sig}       
                       
         #new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
-                      
         #new_order = Order(**{f:order_data[f] for f in new_order_fields})
-        
+
         # Check if order is signed
         
         # Check platform
-        
         if content['payload']['platform'] == 'Ethereum':
 
             print("Check for Ethereum")
