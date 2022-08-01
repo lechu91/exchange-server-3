@@ -124,7 +124,8 @@ def order_book():
     
     print("Checkpoint 1")
     
-    result = json.dumps(g.session.query(Order).all())
+    #result = json.dumps(g.session.query(Order).all())
+    result = g.session.query(Order).all()
     
     print("Checkpoint 2")
                    
