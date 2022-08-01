@@ -131,7 +131,8 @@ def order_book():
     a_list = []
     
     for row in g.session.query(Order).all():
-        a_list.append("Hello")
+        a_list.append(row.sender_pk)
+        
 #             {'sender_pk':row.sender_pk,
 #                        'receiver_pk':row.receiver_pk,
 #                        'buy_currency':row.buy_currency,
