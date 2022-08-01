@@ -69,14 +69,16 @@ def trade():
         
         # Extract data from content
         
-        print("Extra data from content")
+        print("Extract data from content")
         payload = content.get("payload")
+        print("Payload:")
         print(payload)
         sig = content.get("sig")
+        print("Sig:")
         print(sig)
         pk = payload.get("sender_pk")
+        print("PK:")
         print(pk)
-        
         
         #pk = content.get("payload").get("sender_pk")
         
