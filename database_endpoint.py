@@ -84,9 +84,6 @@ def trade():
                       'sell_amount': payload.get("sell_amount"),
                       'signature': sig}
         
-        print("order_data")
-        print(order_data)
-        
         new_order_fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount','signature']
         new_order = Order(**{f:order_data[f] for f in new_order_fields})
 
@@ -102,7 +99,6 @@ def trade():
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
                 print("Gonzalo1")
-#                 g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )
             else:
@@ -116,7 +112,6 @@ def trade():
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
                 print("Gonzalo3")
                 g.session.add(new_order)
-#                 g.session.add(order_data)
                 g.session.commit()
                 return jsonify( True )                      
             else:
@@ -133,18 +128,19 @@ def order_book():
     
     print("Checkpoint 1")
     
-    #result = json.dumps(g.session.query(Order).all())
-    
     a_list = []
     
-#     for an_order in g.session.query(Order).all():
-#         a_list.append({'sender_pk':an_order.sender_pk,
-#                        'receiver_pk':an_order.receiver_pk,
-#                        'buy_currency':an_order.buy_currency,
-#                        'sell_currency':an_order.sell_currency,
-#                        'buy_amount':an_order.buy_amount,
-#                        'sell_amount':an_order.sell_amount,
-#                        'signature': an_order.signature}
+    for row in g.session.query(Order).all():
+        a_list.append({'sender_pk':row.sender_pk,
+                       'receiver_pk':row.receiver_pk,
+                       'buy_currency':row.buy_currency,
+                       'sell_currency':row.sell_currency,
+                       'buy_amount':row.buy_amount,
+                       'sell_amount':row.sell_amount,
+                       'signature': row.signature}
+        print("Hello, world")
+                     
+                      
     
     result = json.dumps({'data' : a_list})
     
