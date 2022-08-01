@@ -92,31 +92,31 @@ def trade():
         # Check platform
         if content['payload']['platform'] == 'Ethereum':
 
-            print("Check for Ethereum")
             # Check Ethereum
+            print("Check for Ethereum")
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload_text)
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
-                print("Gonzalo1")
+#                 print("Gonzalo1")
                 g.session.commit()
                 return jsonify( True )
             else:
                 print("Gonzalo2")
-                print(payload_text)
+#                 print(payload_text)
                 log_message(payload_text)
                 return jsonify( False )
         else:
             # Check Algorand
             print("Check for Algorand")
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
-                print("Gonzalo3")
+#                 print("Gonzalo3")
                 g.session.add(new_order)
                 g.session.commit()
                 return jsonify( True )                      
             else:
                 print("Gonzalo4")
-                print(payload_text)
+#                 print(payload_text)
                 log_message(payload_text)
                 return jsonify( False )                      
 
@@ -126,7 +126,7 @@ def order_book():
     #Your code here
     #Note that you can access the database session using g.session
     
-    print("Checkpoint 1")
+#     print("Checkpoint 1")
     
     a_list = []
     
@@ -140,14 +140,14 @@ def order_book():
                   'signature': row.signature}
         
         a_list.append(a_dict)
-        print(a_dict)
-        print("Hello, world")
+#         print(a_dict)
+#         print("Hello, world")
     
-    print(a_list)
+#     print(a_list)
     result = json.dumps({'data' : a_list})
-    print(result)
+#     print(result)
     
-    print("Checkpoint 2")
+#     print("Checkpoint 2")
                    
     return jsonify(result)
 
