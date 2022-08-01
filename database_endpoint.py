@@ -71,7 +71,6 @@ def trade():
         
         pk = content['payload']['sender_pk']
         #pk = content.get("payload").get("sender_pk")
-        payload_text = json.dumps(content['payload'])
         sig = content.get("sig")
         payload = content.get("payload")
         
@@ -79,6 +78,8 @@ def trade():
         print(payload)
         print(payload_text)
         print(sig)
+        
+        payload_text = json.dumps(payload)
         
         # Create order
         
@@ -110,10 +111,10 @@ def trade():
                 print("Gonzalo1")
                 return jsonify( True )
             else:
-                log_message(json.dumps(payload))
                 print("Gonzalo2")
-                g.session.add(order_data)
-                g.session.commit()
+                print(payload_text)
+                log_message(payload_text)
+                
                 return jsonify( False )
         else:
             # Check Algorand
@@ -125,10 +126,9 @@ def trade():
                 print("Gonzalo3")
                 return jsonify( True )                      
             else:
-                log_message(json.dumps(payload))
                 print("Gonzalo4")
-                g.session.add(order_data)
-                g.session.commit()
+                print(payload_text)
+                log_message(payload_text)
                 return jsonify( False )                      
 
 @app.route('/order_book')
