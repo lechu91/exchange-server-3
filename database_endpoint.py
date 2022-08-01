@@ -98,25 +98,23 @@ def trade():
             
             if eth_account.Account.recover_message(eth_encoded_msg, signature=sig) == pk:
                 g.session.add(new_order)
-#                 print("Gonzalo1")
+                print("Ethereum passed")
                 g.session.commit()
                 return jsonify( True )
             else:
-                print("Gonzalo2")
-#                 print(payload_text)
+                print("Ethereum didn't pass")
                 log_message(payload_text)
                 return jsonify( False )
         else:
             # Check Algorand
             print("Check for Algorand")
             if algosdk.util.verify_bytes(payload_text.encode('utf-8'),sig,pk):
-#                 print("Gonzalo3")
+                print("Algorand passed")
                 g.session.add(new_order)
                 g.session.commit()
                 return jsonify( True )                      
             else:
-                print("Gonzalo4")
-#                 print(payload_text)
+                print("Algorand didn't pass")
                 log_message(payload_text)
                 return jsonify( False )                      
 
