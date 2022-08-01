@@ -131,18 +131,16 @@ def order_book():
     a_list = []
     
     for row in g.session.query(Order).all():
-        a_list.append(row.sender_pk)
+        a_dict = {'sender_pk':row.sender_pk,
+                  'receiver_pk':row.receiver_pk,
+                  'buy_currency':row.buy_currency,
+                  'sell_currency':row.sell_currency,
+                  'buy_amount':row.buy_amount,
+                  'sell_amount':row.sell_amount,
+                  'signature': row.signature}
         
-#             {'sender_pk':row.sender_pk,
-#                        'receiver_pk':row.receiver_pk,
-#                        'buy_currency':row.buy_currency,
-#                        'sell_currency':row.sell_currency,
-#                        'buy_amount':row.buy_amount,
-#                        'sell_amount':row.sell_amount,
-#                        'signature': row.signature}
+        a_list.append(a_dict)
         print("Hello, world")
-                     
-                      
     
     result = json.dumps({'data' : a_list})
     
