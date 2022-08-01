@@ -146,6 +146,8 @@ def order_book():
 #     print(result)
     
 #     print("Checkpoint 2")
+
+    print(jsonify(result))
                    
     return jsonify(result)
 
